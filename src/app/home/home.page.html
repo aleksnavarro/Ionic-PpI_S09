@@ -1,0 +1,43 @@
+<ion-content padding>
+
+<ion-item class="top" color="dark">
+  <ion-label>Duración del descanso</ion-label>
+  <ion-datetime #myPicker display-format="mm:ss" placeholder="Pick it" [(ngModel)]="fullTime" (ionChange)="updateMyDate(myPicker.value)"></ion-datetime>
+</ion-item>
+
+<p>{{elapsed.h}}:{{elapsed.m}}:{{elapsed.s}}</p>
+
+<circle-progress (click)="startTimer()"
+  [percent]="percent"
+  [maxPercent]="100"
+  [radius]="radius"
+  [imageHeight]=""
+  [showTitle]="false"
+  [showSubtitle]="true"
+  [subtitle]="remainingTime"
+  [subtitleFontSize]="40"
+  [showUnits]="false"
+  [outerStrokeWidth]="16"
+  [outerStrokeColor]="'#0000ff'"
+  [showZeroOuterStroke]="false"
+  [backgroundStroke]="'#14003f'"
+  [backgroundStrokeWidth]="3"
+  [outerStrokeGradient]="true"
+  [outerStrokeGradientStopColor]="'#b200ff'"
+  [showInnerStroke]="false"
+></circle-progress>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container *ngIf="timer == false; else running">
+      <ion-fab-button (click)="startTimer()">
+          <ion-icon name="play"></ion-icon>
+        </ion-fab-button>
+    </ng-container>
+    <ng-template #running>
+        <ion-fab-button (click)="stopTimer()">
+            <ion-icon name="square"></ion-icon>
+          </ion-fab-button>
+    </ng-template>
+</ion-fab>
+
+</ion-content>
